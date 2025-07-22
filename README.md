@@ -1,4 +1,4 @@
-# HIND ISRAE BAHAOUI - RAG Chatbot
+# RAG Chatbot
 
 *A localized Retrieval-Augmented Generation (RAG) chatbot powered by Ollama’s Mistral model, LangChain, FAISS, and Streamlit.*
 
@@ -130,22 +130,20 @@ rag_app/
 
 ## Data Workflow & RAG Principle
 
-```mermaid
-flowchart LR
-  subgraph Ingestion [One-Time Ingestion]
-    A[PDFs in data/pdfs/] --> B[ingest.py]
-    B --> C[FAISS Index<br/>(faiss_index.pkl)]
-  end
+PDFs in data/pdfs/ are processed once using ingest.py:
+- Text is extracted using PDFPlumberLoader
+- Split into semantic chunks using SemanticChunker
+- Chunks are embedded via HuggingFaceEmbeddings
+- FAISS builds a vector index: faiss_index.pkl
 
-  subgraph Query [Runtime Query]
-    D[User Question] --> E[rag_chain.py]
-    C --> E
-    E --> F[Ollama Mistral LLM]
-    F --> G[Streamlit UI: Answer]
-  end
-```
+At runtime:
+- You ask a question in the UI (app.py)
+- rag_chain.py loads FAISS and retrieves top-K relevant chunks
+- Chunks are inserted into the LLM prompt
+- Ollama's Mistral model generates an answer based on those chunks
+- Response is displayed in the UI
 
-**RAG Steps**:
+## RAG Steps:
 
 1. **Retrieve**: FAISS returns top-K similar chunks.
 2. **Augment**: Combine chunks into context prompt.
