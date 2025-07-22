@@ -3,6 +3,8 @@
 *A localized Retrieval-Augmented Generation (RAG) chatbot powered by Ollama’s Mistral model, LangChain, FAISS, and Streamlit.*
 
 ---
+<img width="953" height="500" alt="image" src="https://github.com/user-attachments/assets/31e48124-87ea-46d7-868a-92bbc6b41d9f" />
+
 
 ## Table of Contents
 
