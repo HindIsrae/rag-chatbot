@@ -1,0 +1,9 @@
+﻿# Ignore Python virtual environments
+.venv/
+
+# Bytecode
+__pycache__/
+*.pyc
+
+# FAISS index
+faiss_index.pkl
